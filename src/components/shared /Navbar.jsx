@@ -88,7 +88,7 @@ const Navbar = () => {
     transition-all duration-500
     group-hover:scale-110
     group-hover:-translate-y-1
-    group-hover:rotate-12
+    group-hover:rotate-180
     group-hover:shadow-[0_0_35px_rgba(249,115,22,0.7)]
     overflow-hidden
   "
