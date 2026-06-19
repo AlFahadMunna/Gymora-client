@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import NavLink from "./NavLink";
 import { ThemeSwitch } from "../../hooks/useTheme";
 import { NavbarSkeleton } from "./NavbarSkeleton";
-import { GiBookAura } from "react-icons/gi";
 import { FaDumbbell } from "react-icons/fa";
 
 const Navbar = () => {
@@ -80,11 +79,19 @@ const Navbar = () => {
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 border-b transition-colors duration-500"
       >
         <Link href="/" className="group flex items-center gap-3">
-          <div className="relative flex items-center justify-center w-10 h-10 bg-accent rounded-xl shadow-lg group-hover:rotate-12 transition-transform duration-300">
-            <FaDumbbell className="text-accent-foreground text-xl" />
+          <div
+            className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-orange-500 shadow-lg
+group-hover:scale-110
+group-hover:rotate-180
+group-hover:shadow-orange-500/50
+group-hover:shadow-2xl
+transition-all duration-300 ease-out"
+          >
+            <FaDumbbell className="text-white text-xl group-hover:scale-125 transition-transform duration-300" />
           </div>
-          <span className="text-xl font-bold tracking-tight text-foreground">
-            Gymora
+          <span className="text-2xl font-extrabold tracking-wider uppercase">
+            <span className="text-foreground">GYM</span>
+            <span className="text-orange-500">ORA</span>
           </span>
         </Link>
 
