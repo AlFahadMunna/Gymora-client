@@ -80,19 +80,42 @@ const Navbar = () => {
       >
         <Link href="/" className="group flex items-center gap-3">
           <div
-            className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-orange-500 shadow-lg
-group-hover:scale-110
-group-hover:rotate-180
-group-hover:shadow-orange-500/50
-group-hover:shadow-2xl
-transition-all duration-300 ease-out"
+            className="
+    relative flex items-center justify-center
+    w-11 h-11 rounded-xl
+    bg-gradient-to-br from-blue-600 via-violet-600 to-orange-500
+    shadow-lg
+    transition-all duration-500
+    group-hover:scale-110
+    group-hover:-translate-y-1
+    group-hover:rotate-12
+    group-hover:shadow-[0_0_35px_rgba(249,115,22,0.7)]
+    overflow-hidden
+  "
           >
-            <FaDumbbell className="text-white text-xl group-hover:scale-125 transition-transform duration-300" />
+            <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
+
+            <FaDumbbell
+              className="
+      relative z-10 text-white text-xl
+      transition-all duration-500
+      group-hover:scale-125
+    "
+            />
           </div>
-          <span className="text-2xl font-extrabold tracking-wider uppercase">
-            <span className="text-foreground">GYM</span>
-            <span className="text-orange-500">ORA</span>
-          </span>
+
+          <div className="flex flex-col leading-none">
+            <span className="text-2xl font-black tracking-tight uppercase">
+              <span className="text-blue-600">GYM</span>
+              <span className="bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">
+                ORA
+              </span>
+            </span>
+
+            <span className="text-[10px] uppercase tracking-[0.3em] text-default-500">
+              Train • Transform • Thrive
+            </span>
+          </div>
         </Link>
 
         <ul className="hidden md:flex items-center gap-8">
@@ -100,7 +123,17 @@ transition-all duration-300 ease-out"
             <li key={l.href}>
               <NavLink
                 href={l.href}
-                className="text-sm font-medium hover:text-accent transition-colors"
+                className="
+relative text-sm font-semibold
+after:absolute after:left-0 after:-bottom-1
+after:h-[2px] after:w-0
+after:bg-gradient-to-r
+after:from-blue-600
+after:to-orange-500
+after:transition-all
+after:duration-300
+hover:after:w-full
+"
               >
                 {l.label}
               </NavLink>
@@ -219,7 +252,17 @@ transition-all duration-300 ease-out"
               <li key={l.href} onClick={() => setIsOpen(false)}>
                 <NavLink
                   href={l.href}
-                  className="text-2xl! font-bold  hover:text-accent transition-colors"
+                  className="
+relative text-sm font-semibold
+after:absolute after:left-0 after:-bottom-1
+after:h-[2px] after:w-0
+after:bg-gradient-to-r
+after:from-blue-600
+after:to-orange-500
+after:transition-all
+after:duration-300
+hover:after:w-full
+"
                 >
                   {l.label}
                 </NavLink>
