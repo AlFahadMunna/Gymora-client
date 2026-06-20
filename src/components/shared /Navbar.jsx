@@ -94,7 +94,6 @@ const Navbar = () => {
   "
           >
             <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
-
             <FaDumbbell
               className="
       relative z-10 text-white text-xl
