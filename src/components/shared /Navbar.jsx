@@ -11,15 +11,15 @@ import NavLink from "./NavLink";
 import { ThemeSwitch } from "../../hooks/useTheme";
 import { NavbarSkeleton } from "./NavbarSkeleton";
 import { FaDumbbell } from "react-icons/fa";
+import { authClient, useSession } from "@/lib/auth-client";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const user = {
-    name: "fahad",
-  };
+  const { data: session, isPending, refetch } = useSession();
 
-  const isPending = false;
+  const user = session?.user;
+
   const { scrollY } = useScroll();
 
   const backgroundColor = useTransform(
@@ -175,27 +175,29 @@ hover:after:w-full
                   </div>
                 </div>
                 <Dropdown.Menu>
-                  <Dropdown.Item key="my-listing" textValue="My Listing">
-                    <Link href="/my-listing" className="w-full block">
-                      <Label>My Listing</Label>
-                    </Link>
-                  </Dropdown.Item>
-
-                  <Dropdown.Item key="my-bookings" textValue="My Bookings">
-                    <Link href="/my-bookings" className="w-full block">
-                      <Label>My Bookings</Label>
+                  <Dropdown.Item key="dashboard">
+                    <Link
+                      href={
+                        user?.role === "admin"
+                          ? "/dashboard/admin"
+                          : user?.role === "trainer"
+                            ? "/dashboard/trainer"
+                            : "/dashboard/member"
+                      }
+                      className="w-full block"
+                    >
+                      Dashboard
                     </Link>
                   </Dropdown.Item>
 
                   <Dropdown.Item
                     key="logout"
-                    textValue="Logout"
                     color="danger"
                     onClick={handleSignOut}
                   >
-                    <div className="flex w-full items-center justify-between gap-2">
-                      <Label>Log Out</Label>
-                      <FaArrowUpRightFromSquare className="size-3.5 text-danger" />
+                    <div className="flex items-center justify-between w-full">
+                      <span>Sign Out</span>
+                      <FaArrowUpRightFromSquare className="text-danger text-xs" />
                     </div>
                   </Dropdown.Item>
                 </Dropdown.Menu>

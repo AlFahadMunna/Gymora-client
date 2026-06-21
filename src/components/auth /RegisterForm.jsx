@@ -8,6 +8,8 @@ import {
   Form,
   Input,
   Label,
+  Radio,
+  RadioGroup,
   Separator,
   TextField,
 } from "@heroui/react";
@@ -23,17 +25,25 @@ import { FiLoader, FiUserPlus } from "react-icons/fi";
 const RegisterForm = () => {
   const router = useRouter();
   const [isPending, setIsPending] = useState(false);
+  const [role, setRole] = useState("member");
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const formdata = new FormData(e.target);
-    const { email, name, image, password } = Object.fromEntries(
+    const { email, name, image, password, role } = Object.fromEntries(
       formdata.entries(),
     );
     setIsPending(true);
     try {
       await authClient.signUp.email(
-        { email, password, name, image, callbackURL: "/" },
+        {
+          email,
+          password,
+          name,
+          image,
+          role,
+          callbackURL: "/",
+        },
         {
           onSuccess: () => {
             toast.success("Registration Successful");
@@ -190,6 +200,32 @@ overflow-hidden
               </Description>
               <FieldError className="text-danger text-xs mt-1" />
             </TextField>
+
+            <RadioGroup
+              label="Join As"
+              value={role}
+              onValueChange={setRole}
+              orientation="horizontal"
+              className="w-full"
+            >
+              <Radio value="member">
+                <div className="flex flex-col">
+                  <span className="font-semibold">💪 Member</span>
+                  <span className="text-xs text-default-500">
+                    Join classes and track progress
+                  </span>
+                </div>
+              </Radio>
+
+              <Radio value="trainer">
+                <div className="flex flex-col">
+                  <span className="font-semibold">🏋️ Trainer</span>
+                  <span className="text-xs text-default-500">
+                    Create and manage classes
+                  </span>
+                </div>
+              </Radio>
+            </RadioGroup>
 
             <div className="flex flex-col gap-4 mt-2">
               <Button
