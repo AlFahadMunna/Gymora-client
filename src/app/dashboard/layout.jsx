@@ -1,9 +1,50 @@
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import { HiX } from "react-icons/hi";
+import {
+  MdDashboard,
+  MdFitnessCenter,
+  MdPerson,
+  MdSettings,
+} from "react-icons/md";
+import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 
-const DashboardSidebar = ({ open }) => {
+const menu = [
+  {
+    title: "Dashboard",
+    icon: <MdDashboard size={20} />,
+    href: "#",
+  },
+  {
+    title: "Classes",
+    icon: <MdFitnessCenter size={20} />,
+    href: "#",
+  },
+  {
+    title: "Profile",
+    icon: <MdPerson size={20} />,
+    href: "#",
+  },
+  {
+    title: "Settings",
+    icon: <MdSettings size={20} />,
+    href: "#",
+  },
+];
+
+export default function DashboardLayout({ children }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div>
+    <div className="min-h-screen bg-default-50">
+      {/* Navbar */}
+
+      <DashboardNavbar open={open} setOpen={setOpen} />
+
+      {/* Sidebar */}
+
       <aside
         className={`fixed top-0 left-0 z-50 h-screen w-72 border-r border-default-200 bg-background/95 backdrop-blur-xl transition-transform duration-300
 
@@ -32,8 +73,16 @@ const DashboardSidebar = ({ open }) => {
           ))}
         </nav>
       </aside>
+
+      {/* Main */}
+
+      <main className="pt-20 lg:ml-72">
+        <div className="min-h-[calc(100vh-80px)] p-4 md:p-6 lg:p-8">
+          <div className="rounded-3xl border border-default-200 bg-background p-6 shadow-xl">
+            {children}
+          </div>
+        </div>
+      </main>
     </div>
   );
-};
-
-export default DashboardSidebar;
+}

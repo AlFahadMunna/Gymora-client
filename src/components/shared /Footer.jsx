@@ -15,9 +15,14 @@ import {
 } from "react-icons/fa";
 
 import { FaXTwitter } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const pathName = usePathname();
+  if (pathName.includes("dashboard")) {
+    return null;
+  }
 
   const socialLinks = [
     {

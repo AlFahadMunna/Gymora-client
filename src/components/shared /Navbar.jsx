@@ -6,7 +6,7 @@ import { Avatar, Button, Dropdown, Label } from "@heroui/react";
 import Link from "next/link";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import NavLink from "./NavLink";
 import { ThemeSwitch } from "../../hooks/useTheme";
 import { NavbarSkeleton } from "./NavbarSkeleton";
@@ -15,10 +15,11 @@ import { authClient, useSession } from "@/lib/auth-client";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
-  const { data: session, isPending, refetch } = useSession();
 
-  const user = session?.user;
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const { data: session, isPending, refetch } = useSession();
 
   const { scrollY } = useScroll();
 
@@ -28,9 +29,15 @@ const Navbar = () => {
     ["rgba(var(--background-rgb), 0)", "rgba(var(--background-rgb), 0.8)"],
   );
 
+  // AFTER ALL HOOKS
+  if (pathname.includes("dashboard")) {
+    return null;
+  }
+
+  const user = session?.user;
+
   const handleSignOut = async () => {
     await authClient.signOut();
-    // router.push("/login");
     await refetch();
     router.refresh();
   };
@@ -63,10 +70,11 @@ const Navbar = () => {
   ];
 
   const initialUser = user?.name
-    .trim()
+    ?.trim()
     ?.split(" ")
     ?.slice(0, 2)
-    ?.map((i) => i[0].toUpperCase());
+    ?.map((i) => i[0].toUpperCase())
+    ?.join("");
 
   return (
     <header>
