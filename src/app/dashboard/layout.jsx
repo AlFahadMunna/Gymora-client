@@ -1,38 +1,102 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { HiX } from "react-icons/hi";
 import {
   MdDashboard,
-  MdFitnessCenter,
   MdPerson,
-  MdSettings,
+  MdFitnessCenter,
+  MdForum,
+  MdAssignment,
+  MdPeople,
+  MdManageAccounts,
+  MdHowToReg,
 } from "react-icons/md";
-import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 
-const menu = [
-  {
-    title: "Dashboard",
-    icon: <MdDashboard size={20} />,
-    href: "#",
-  },
-  {
-    title: "Classes",
-    icon: <MdFitnessCenter size={20} />,
-    href: "#",
-  },
-  {
-    title: "Profile",
-    icon: <MdPerson size={20} />,
-    href: "#",
-  },
-  {
-    title: "Settings",
-    icon: <MdSettings size={20} />,
-    href: "#",
-  },
-];
+import { FaUsers, FaClipboardList } from "react-icons/fa";
+
+import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+
+const menu = {
+  member: [
+    {
+      title: "Dashboard",
+      href: "/dashboard/member",
+      icon: <MdDashboard size={20} />,
+    },
+    {
+      title: "My Profile",
+      href: "/dashboard/member/profile",
+      icon: <MdPerson size={20} />,
+    },
+    {
+      title: "My Bookings",
+      href: "/dashboard/member/bookings",
+      icon: <MdFitnessCenter size={20} />,
+    },
+    {
+      title: "Become a Trainer",
+      href: "/dashboard/member/become-trainer",
+      icon: <MdHowToReg size={20} />,
+    },
+  ],
+
+  trainer: [
+    {
+      title: "Dashboard",
+      href: "/dashboard/trainer",
+      icon: <MdDashboard size={20} />,
+    },
+    {
+      title: "My Profile",
+      href: "/dashboard/trainer/profile",
+      icon: <MdPerson size={20} />,
+    },
+    {
+      title: "Add Class",
+      href: "/dashboard/trainer/add-class",
+      icon: <MdFitnessCenter size={20} />,
+    },
+    {
+      title: "My Classes",
+      href: "/dashboard/trainer/classes",
+      icon: <MdAssignment size={20} />,
+    },
+    {
+      title: "Community Posts",
+      href: "/dashboard/trainer/forum",
+      icon: <MdForum size={20} />,
+    },
+  ],
+
+  admin: [
+    {
+      title: "Dashboard",
+      href: "/dashboard/admin",
+      icon: <MdDashboard size={20} />,
+    },
+    {
+      title: "Manage Users",
+      href: "/dashboard/admin/users",
+      icon: <FaUsers size={18} />,
+    },
+    {
+      title: "Trainer Applications",
+      href: "/dashboard/admin/trainers",
+      icon: <MdManageAccounts size={20} />,
+    },
+    {
+      title: "Manage Classes",
+      href: "/dashboard/admin/classes",
+      icon: <MdFitnessCenter size={20} />,
+    },
+    {
+      title: "Community Posts",
+      href: "/dashboard/admin/forum",
+      icon: <FaClipboardList size={18} />,
+    },
+  ],
+};
 
 export default function DashboardLayout({ children }) {
   const [open, setOpen] = useState(false);
@@ -45,34 +109,7 @@ export default function DashboardLayout({ children }) {
 
       {/* Sidebar */}
 
-      <aside
-        className={`fixed top-0 left-0 z-50 h-screen w-72 border-r border-default-200 bg-background/95 backdrop-blur-xl transition-transform duration-300
-
-        ${open ? "translate-x-0" : "-translate-x-full"}
-
-        lg:top-16 lg:h-[calc(100vh-64px)] lg:translate-x-0`}
-      >
-        <div className="flex items-center justify-between border-b p-5 lg:hidden">
-          <span className="font-semibold">Menu</span>
-
-          <button onClick={() => setOpen(false)}>
-            <HiX size={24} />
-          </button>
-        </div>
-
-        <nav className="space-y-2 p-4">
-          {menu.map((item) => (
-            <Link
-              key={item.title}
-              href={item.href}
-              className="group flex items-center gap-4 rounded-xl px-4 py-3 font-medium transition-all hover:bg-gradient-to-r hover:from-blue-600/10 hover:to-orange-500/10 hover:text-blue-600"
-            >
-              {item.icon}
-              {item.title}
-            </Link>
-          ))}
-        </nav>
-      </aside>
+      <DashboardSidebar open={open} setOpen={setOpen} menu={menu} />
 
       {/* Main */}
 
