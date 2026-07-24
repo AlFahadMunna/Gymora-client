@@ -201,31 +201,47 @@ overflow-hidden
               <FieldError className="text-danger text-xs mt-1" />
             </TextField>
 
-            <RadioGroup
-              label="Join As"
-              value={role}
-              onValueChange={setRole}
-              orientation="horizontal"
-              className="w-full"
-            >
-              <Radio value="member">
-                <div className="flex flex-col">
-                  <span className="font-semibold">💪 Member</span>
-                  <span className="text-xs text-default-500">
-                    Join classes and track progress
-                  </span>
-                </div>
-              </Radio>
+            <div className="flex flex-col gap-4">
+              <RadioGroup
+                name="role"
+                defaultValue="member"
+                onChange={(v) => setRole(v)}
+                orientation="horizontal"
+                className="flex flex-row gap-4"
+              >
+                <Label className="w-full">Join As</Label>
 
-              <Radio value="trainer">
-                <div className="flex flex-col">
-                  <span className="font-semibold">🏋️ Trainer</span>
-                  <span className="text-xs text-default-500">
-                    Create and manage classes
-                  </span>
-                </div>
-              </Radio>
-            </RadioGroup>
+                <Radio value="member" className="flex-1">
+                  <Radio.Content>
+                    <Radio.Control>
+                      <Radio.Indicator />
+                    </Radio.Control>
+
+                    <div className="flex flex-col">
+                      <span className="font-semibold">💪 Member</span>
+                      <Description className="text-xs">
+                        Join classes and track progress
+                      </Description>
+                    </div>
+                  </Radio.Content>
+                </Radio>
+
+                <Radio value="trainer" className="flex-1">
+                  <Radio.Content>
+                    <Radio.Control>
+                      <Radio.Indicator />
+                    </Radio.Control>
+
+                    <div className="flex flex-col">
+                      <span className="font-semibold">🏋️ Trainer</span>
+                      <Description className="text-xs">
+                        Create and manage classes
+                      </Description>
+                    </div>
+                  </Radio.Content>
+                </Radio>
+              </RadioGroup>
+            </div>
 
             <div className="flex flex-col gap-4 mt-2">
               <Button
