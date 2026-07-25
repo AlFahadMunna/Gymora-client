@@ -48,10 +48,7 @@ const Navbar = () => {
     { href: "/forum", label: "Community Forum" },
 
     ...(user?.role === "member"
-      ? [
-          { href: "/dashboard/member", label: "Dashboard" },
-          { href: "/my-bookings", label: "My Bookings" },
-        ]
+      ? [{ href: "/dashboard/member", label: "Dashboard" }]
       : []),
 
     ...(user?.role === "trainer"

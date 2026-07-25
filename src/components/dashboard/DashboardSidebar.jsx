@@ -10,9 +10,9 @@ const DashboardSidebar = ({ open, setOpen, menu }) => {
 
   const { data: session } = authClient.useSession();
 
-  const role = session?.user?.role;
+  const role = session?.user?.role || "member";
 
-  const items = menu[role] || [];
+  const items = menu[role];
 
   return (
     <aside
